@@ -18,19 +18,19 @@ namespace Repository{
         void Add();
     }
 
-    public interface IUpdate<T> : IGet{
+    public interface IUpdate<T> : IGet<T>{
         void Update();
     }
 
-    public interface IRemove<T> : IGet{
+    public interface IRemove<T> : IGet<T>{
         void Remove();
     }
 
-    public interface IRepository : IAdd, IUpdate, IRemove{
+    public interface IRepository<T> : IAdd<T>, IUpdate<T>, IRemove<T>{
 
     }
 
-    public class CustomerRepository : IRepository{
+    public class CustomerRepository : IRepository<Customer>{
 
         public void Get(){
 
@@ -49,9 +49,21 @@ namespace Repository{
         }
     }
 
-    public class UserRepository : IGet{
+    public class Customer{
+        public Customer(){
+
+        }
+    }
+
+    public class UserRepository : IGet<User>{
         public void Get(){
 
+        }
+    }
+
+    public class User{
+        public User(){
+            
         }
     }
 
@@ -80,18 +92,6 @@ namespace Repository{
 
         public void Get(IGet<User> repository){
             repository.Get();
-        }
-    }
-
-    public class Customer{
-        public Customer(){
-
-        }
-    }
-
-    public class User{
-        public User(){
-            
         }
     }
 }
