@@ -1,20 +1,16 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Aves;
+using clean.domain.pizza;
 using Paint;
 
-// var canvas = App.CreateCanvas();
-// var toolbar = App.CreateToolbar();
-// var dto = new DtoShape(new Point(0,0), new Point(360,360), "black");
-// var shape = toolbar.GetShape("circle", dto);
+//Pizza
 
-// if(shape != null){
-//     canvas.Add(shape);
-// }
 
+//Paint
 var dto = new DtoShape(new Point(0,0), new Point(0,0), "black");
 App.Add("circle", dto);
 
-
+//Aves
 var pinguino = new Pinguino(5);
 var aguila = new Aguila(10, 100);
 
