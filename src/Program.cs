@@ -1,5 +1,16 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Aves;
+using Paint;
+
+var canvas = App.CreateCanvas();
+var toolbar = App.CreateToolbar();
+var dto = new DtoShape(new Point(0,0), new Point(360,360), "black");
+var shape = toolbar.GetShape("circle", dto);
+
+if(shape != null){
+    canvas.Add(shape);
+}
+
 
 var pinguino = new Pinguino(5);
 var aguila = new Aguila(10, 100);
