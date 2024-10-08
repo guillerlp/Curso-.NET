@@ -106,10 +106,33 @@ namespace Paint{
         }
     }
 
+    public abstract class CommandBase
+    {
+        public abstract void Execute();
+    }
+
+    public class AddCommand : CommandBase
+    {
+        private ICanvas _receiver;
+        private Shape _shape;
+
+        public AddCommand(ICanvas receiver, Shape shape){
+            _receiver = receiver;
+            _shape = shape;
+        }
+
+        public override void Execute()
+        {
+            _receiver.Add(_shape);
+        }
+    }
 
     public static class App
     {
-        public static IToolBar CreateToolbar()
+        public static IToolBar toolBar = CreateToolbar();
+        public static ICanvas canvas = CreateCanvas();
+
+        private static IToolBar CreateToolbar()
         {
             var toolbar = new ToolBar();
 
@@ -122,9 +145,32 @@ namespace Paint{
             return toolbar;
         }
 
-        public static ICanvas CreateCanvas()
+        private static ICanvas CreateCanvas()
         {
             return new Canvas();
         }
+
+        public static void Add (string shapeName, DtoShape dtoShape){
+            var shape = toolBar.GetShape(shapeName, dtoShape);
+
+            if (shape != null)
+            {
+                CommandBase addCommand = new AddCommand(canvas, shape);
+                addCommand.Execute();
+            }
+        }
     }
 }
+
+
+// var canvas = App.CreateCanvas();
+// var toolbar = App.CreateToolbar();
+// var dto = new DtoShape(new Point(0,0), new Point(360,360), "black");
+// var shape = toolbar.GetShape("circle", dto);
+// if(shape != null){
+//     canvas.Add(shape);
+// }
+
+// var dto = new DtoShape(new Point(0,0), new Point(0,0), "black");
+// App.run("add", "circle", dto)
+ 
